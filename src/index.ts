@@ -1,6 +1,7 @@
-import Anser, { AnserJsonEntry } from "anser";
-import { escapeCarriageReturn } from "escape-carriage";
-import * as React from "react";
+import type { AnserJsonEntry } from 'anser';
+import Anser from 'anser';
+import { escapeCarriageReturn } from 'escape-carriage';
+import * as React from 'react';
 
 /**
  * Converts ANSI strings into JSON output.
@@ -11,10 +12,7 @@ import * as React from "react";
  *                              to the HTML output.
  * @return {Array} The parsed input.
  */
-function ansiToJSON(
-  input: string,
-  use_classes: boolean = false
-): AnserJsonEntry[] {
+function ansiToJSON(input: string, use_classes: boolean = false): AnserJsonEntry[] {
   input = escapeCarriageReturn(fixBackspace(input));
   return Anser.ansiToJson(input, {
     json: true,
@@ -31,7 +29,7 @@ function ansiToJSON(
  * @return {String} class name(s)
  */
 function createClass(bundle: AnserJsonEntry): string | null {
-  let classNames: string = "";
+  let classNames: string = '';
 
   if (bundle.bg) {
     classNames += `${bundle.bg}-bg `;
@@ -43,7 +41,7 @@ function createClass(bundle: AnserJsonEntry): string | null {
     classNames += `ansi-${bundle.decoration} `;
   }
 
-  if (classNames === "") {
+  if (classNames === '') {
     return null;
   }
 
@@ -68,28 +66,28 @@ function createStyle(bundle: AnserJsonEntry): React.CSSProperties {
   }
   switch (bundle.decoration) {
     case 'bold':
-        style.fontWeight = 'bold';
-        break;
+      style.fontWeight = 'bold';
+      break;
     case 'dim':
-        style.opacity = '0.5';
-        break;
+      style.opacity = '0.5';
+      break;
     case 'italic':
-        style.fontStyle = 'italic';
-        break;
+      style.fontStyle = 'italic';
+      break;
     case 'hidden':
-        style.visibility = 'hidden';
-        break;
+      style.visibility = 'hidden';
+      break;
     case 'strikethrough':
-        style.textDecoration = 'line-through';
-        break;
+      style.textDecoration = 'line-through';
+      break;
     case 'underline':
-        style.textDecoration = 'underline';
-        break;
+      style.textDecoration = 'underline';
+      break;
     case 'blink':
-        style.textDecoration = 'blink';
-        break;
+      style.textDecoration = 'blink';
+      break;
     default:
-        break;
+      break;
   }
   return style;
 }
@@ -106,21 +104,18 @@ function convertBundleIntoReact(
   linkify: boolean,
   useClasses: boolean,
   bundle: AnserJsonEntry,
-  key: number
+  key: number,
 ): JSX.Element {
   const style = useClasses ? null : createStyle(bundle);
   const className = useClasses ? createClass(bundle) : null;
 
   if (!linkify) {
-    return React.createElement(
-      "span",
-      { style, key, className },
-      bundle.content
-    );
+    return React.createElement('span', { style, key, className }, bundle.content);
   }
 
   const content: React.ReactNode[] = [];
-  const linkRegex = /(\s|^)(https?:\/\/(?:www\.|(?!www))[^\s.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,})/g;
+  const linkRegex =
+    /(\s|^)(https?:\/\/(?:www\.|(?!www))[^\s.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,})/g;
 
   let index = 0;
   let match: RegExpExecArray | null;
@@ -134,17 +129,17 @@ function convertBundleIntoReact(
 
     // Make sure the href we generate from the link is fully qualified. We assume http
     // if it starts with a www because many sites don't support https
-    const href = url.startsWith("www.") ? `http://${url}` : url;
+    const href = url.startsWith('www.') ? `http://${url}` : url;
     content.push(
       React.createElement(
-        "a",
+        'a',
         {
           key: index,
           href,
-          target: "_blank",
+          target: '_blank',
         },
-        `${url}`
-      )
+        `${url}`,
+      ),
     );
 
     index = linkRegex.lastIndex;
@@ -154,10 +149,11 @@ function convertBundleIntoReact(
     content.push(bundle.content.substring(index));
   }
 
-  return React.createElement("span", { style, key, className }, content);
+  return React.createElement('span', { style, key, className }, content);
 }
 
 declare interface Props {
+  id?: string;
   children?: string;
   linkify?: boolean;
   className?: string;
@@ -167,11 +163,11 @@ declare interface Props {
 export default function Ansi(props: Props): JSX.Element {
   const { className, useClasses, children, linkify } = props;
   return React.createElement(
-    "code",
+    'code',
     { className },
-    ansiToJSON(children ?? "", useClasses ?? false).map(
-      convertBundleIntoReact.bind(null, linkify ?? false, useClasses ?? false)
-    )
+    ansiToJSON(children ?? '', useClasses ?? false).map(
+      convertBundleIntoReact.bind(null, linkify ?? false, useClasses ?? false),
+    ),
   );
 }
 
@@ -185,7 +181,8 @@ function fixBackspace(txt: string) {
   do {
     txt = tmp;
     // Cancel out anything-but-newline followed by backspace
-    tmp = txt.replace(/[^\n]\x08/gm, "");
+    // eslint-disable-next-line no-control-regex
+    tmp = txt.replace(/[^\n]\x08/gm, '');
   } while (tmp.length < txt.length);
   return txt;
 }

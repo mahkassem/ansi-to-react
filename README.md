@@ -2,14 +2,12 @@
 
 This package convert ANSI escape codes to formatted text output for React.
 
+⚠️ This is a fork of the `ansi-to-react` package that updates dependencies and moves to ESM only. ⚠️
+
 ## Installation
 
 ```
-$ yarn add ansi-to-react
-```
-
-```
-$ npm install --save ansi-to-react
+$ npm install @curvenote/ansi-to-react
 ```
 
 ## Usage
@@ -18,19 +16,17 @@ $ npm install --save ansi-to-react
 
 The example below shows how we can use this package to render a string with ANSI escape codes.
 
-```javascript
-import Ansi from "ansi-to-react";
+```jsx
+import Ansi from '@curvenote/ansi-to-react';
 
-export function () => {
-  return <Ansi>
-    {'\u001b[34mhello world'}
-  </Ansi>;
-};
+export function MyComponent() {
+  return <Ansi>{'\u001b[34mhello world'}</Ansi>;
+}
 ```
 
 Will render:
 
-```javascript
+```html
 <code>
   <span style="color:rgb(0, 0, 187)">hello world</span>
 </code>
@@ -40,13 +36,13 @@ Will render:
 
 Style with classes instead of `style` attribute.
 
-```javascript
-<Ansi useClasses>{"\u001b[34mhello world"}</Ansi>
+```jsx
+<Ansi useClasses>{'\u001b[34mhello world'}</Ansi>
 ```
 
 Will render
 
-```javascript
+```html
 <code>
   <span class="ansi-blue-fg">hello world</span>
 </code>
@@ -84,7 +80,7 @@ $ npm install
 To run the test suite for this project, run:
 
 ```
-$ npm test
+$ npm run test
 ```
 
 ## Documentation
@@ -93,7 +89,7 @@ We're working on adding more documentation for this component. Stay tuned by wat
 
 ## Support
 
-If you experience an issue while using this package or have a feature request, please file an issue on the [issue board](https://github.com/nteract/ansi-to-react/issues),
+If you experience an issue while using this package or have a feature request, please file an issue on the [issue board](https://github.com/curvenote/ansi-to-react/issues),
 
 ## License
 

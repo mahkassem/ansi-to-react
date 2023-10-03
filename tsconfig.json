@@ -1,21 +1,28 @@
 {
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Default",
   "compilerOptions": {
-    "strict": true,
+    "composite": false,
     "declaration": true,
+    "declarationMap": true,
+    "target": "ES6",
+    "jsx": "react-jsx",
     "esModuleInterop": true,
-    "composite": true,
-    "lib": ["esnext", "dom"],
-    "target": "es2017",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "skipLibCheck": true,
-    "noImplicitAny": true,
-    "outDir": "lib",
-    "rootDir": "src",
-    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
+    "inlineSources": false,
+    "isolatedModules": true,
+    "module": "Node16",
+    "moduleResolution": "Node16",
+    "allowSyntheticDefaultImports": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
     "preserveWatchOutput": true,
-    "jsx": "react"
+    "skipLibCheck": true,
+    "strict": true,
+    "lib": ["ES2019", "DOM"],
+    "typeRoots": ["./node_modules/@types"],
+    "outDir": "dist"
   },
   "include": ["src"],
-  "references": []
+  "exclude": ["dist", "build", "node_modules", "src/**/*.spec.ts", "tests", "node_modules"]
 }
