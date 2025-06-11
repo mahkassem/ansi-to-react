@@ -21,7 +21,10 @@
   "files": [
     "dist"
   ],
-  "repository": "https://github.com/mahkassem/ansi-to-react",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mahkassem/ansi-to-react.git"
+  },
   "keywords": [
     "ansi",
     "react"
