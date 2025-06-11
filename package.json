@@ -1,6 +1,6 @@
 {
-  "name": "@curvenote/ansi-to-react",
-  "version": "7.0.0",
+  "name": "@mahkassem/ansi-to-react",
+  "version": "8.0.0",
   "description": "ANSI to React Elements",
   "type": "module",
   "exports": "./dist/index.js",
@@ -21,7 +21,7 @@
   "files": [
     "dist"
   ],
-  "repository": "https://github.com/curvenote/ansi-to-react",
+  "repository": "https://github.com/mahkassem/ansi-to-react",
   "keywords": [
     "ansi",
     "react"
@@ -29,7 +29,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "author": "Kyle Kelley <rgbkrk@gmail.com>, Rowan Cockett <rowanc1@gmail.com>",
+  "author": "Kyle Kelley <rgbkrk@gmail.com>, Rowan Cockett <rowanc1@gmail.com>, Mahmoud Kassem <mahmoud.ali.kassem@gmail.com>",
   "license": "BSD-3-Clause",
   "dependencies": {
     "anser": "^2.1.1",
